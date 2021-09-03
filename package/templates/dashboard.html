@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block body %}
+    <h2>Dashboard</h2>
+    <h4>Welcome {{user.username}}</h4>
+    <button id='add-crop' data-toggle="modal" data-target="#add-crop-modal" class="btn btn-info" type="button">Add crop</button>
+    
+    <div class="modal" id="add-crop-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new Crop</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/add-crop" method="POST">
+                        <div class="form-group">
+                            <label for="crop" class="form-label mt-4">Crop name</label>
+                            <input type="text" class="form-control" id="crop" name="crop"  placeholder="Crop Name. Ex Potatoes">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label mt-4" for="description">Description</label>
+                            <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label mt-4" for="quantity">Quantity</label>
+                            <input class="form-control" type="number" name='quantity' id='quantity'></input>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label mt-4" for="price">Price</label>
+                            <input class="form-control" type="number" name='price' id='price'></input>
+                        </div>
+                        <div class="d-flex">
+                            <button type="submit" class="btn btn-primary flex-1" id='add-crop-form-button'>Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% for item in user.crops %}
+        {{item}}
+    {% endfor %}
+    <script>
+        const id = "{{ user.id }}"
+        const username = "{{ user.username }}"
+        const modal = document.querySelector('#add-crop-modal')
+
+        const openModal = () => modal.style.display = 'block'
+        const closeModal = () => modal.style.display = 'none'
+        document.querySelector('#add-crop').addEventListener('click', openModal)
+        document.querySelector('.btn-close').addEventListener('click', closeModal)
+    </script>
+
+    <style>
+        form > [data-bs-dismiss] {
+            content: '';
+        }
+    </style>
+{% endblock body  %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %} KAM {% endblock title %}
+
+{% block body %}
+<div class="container">
+    <div id="errors"></div>
+    <form id='form' action="/signup" method="POST">
+        <fieldset>
+            <legend>Signup Form</legend>
+            <div class="form-group">
+                <label for="usernmame" class="form-label mt-4">Username</label>
+                <input autocomplete="off" type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username" required>
+                <small id="usernameHelp" class="form-text text-muted">Enter your username/name</small>
+            </div>
+            <div class="form-group">
+                <label for="passwordInput" class="form-label mt-4">Password</label>
+                <input autocomplete="off" type="password" name="password" class="form-control" id="passwordInput" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPasswordInput" class="form-label mt-4">Confirm Password</label>
+                <input autocomplete="off" type="password" class="form-control" id="confirmPasswordInput" placeholder="Password" required>
+            </div>
+            <button type="submit" class="mt-3 btn btn-primary">Submit</button>
+        </fieldset>
+    </form>
+</div>
+<!-- <script>
+    document.querySelector('#form').addEventListener('submit', e => {
+        e.preventDefault();
+        
+        const errors = []
+        const errorEl = document.querySelector('#errors');
+        const usernameInput = document.querySelector("#username")
+        const passwordInput = document.querySelector("#passwordInput")
+        const confirmPasswordInput = document.querySelector("#confirmPasswordInput")
+        
+        if (!usernameInput.value) {
+            errors.push('Please enter a username')
+        }
+        
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            errors.push('The two password fields must match')
+        }
+
+        if (errors.length) {
+            errorEl.innerHTML = errors.map(err => {
+                return `<h2>${err}</h2>`
+            })
+        } else {
+            const url = new URL(window.location.href);
+            url.searchParams.set('username', usernameInput.value)
+            url.searchParams.set('password', passwordInput.value)
+            // window.location.href = url
+            fetch(url, {
+                method: 'POST'
+            })
+            .then(res => res.json())
+            .then(
+                wind
+            )
+        }
+    })
+</script> -->
+{% endblock body %}
