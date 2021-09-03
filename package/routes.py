@@ -79,3 +79,7 @@ def add_crop():
     db.session.commit()
 
     return redirect('/dashboard', code=302)
+
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutus.html')    
