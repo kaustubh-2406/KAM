@@ -1,4 +1,4 @@
-from flask import render_template, url_for
+from flask import render_template, url_for,request
 from package import app, products
 from package.models import Farmer, Crop, Trader
 
@@ -17,3 +17,6 @@ def login():
         password = request.form['password']
         print(username, ' -> ', password)
         return f'{username} is logged in'
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutus.html')    
